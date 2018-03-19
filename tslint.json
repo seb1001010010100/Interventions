@@ -120,13 +120,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "stk",
+      "inter",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "stk",
+      "inter",
       "kebab-case"
     ],
     "no-output-on-prefix": true,

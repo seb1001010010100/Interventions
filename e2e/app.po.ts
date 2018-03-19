@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.css('stk-root h1')).getText();
+    return element(by.css('inter-root h1')).getText();
   }
 }
