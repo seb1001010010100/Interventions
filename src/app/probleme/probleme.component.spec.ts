@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemeComponent } from './probleme.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -8,6 +9,7 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
       declarations: [ ProblemeComponent ]
     })
     .compileComponents();
@@ -19,7 +21,14 @@ describe('ProblemeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
+
+  it('champ du prénom ne doit pas comporter moins de 3 charactère', () => {
+    let zonePrenom = component.problemeForm.controls['prenom'];
+    zonePrenom.setValue('a'.repeat(2));
+    expect(zonePrenom.valid).toBeFalsy();
+
   });
 });
