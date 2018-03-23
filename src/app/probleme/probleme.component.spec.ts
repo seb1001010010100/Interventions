@@ -43,12 +43,20 @@ describe('ProblemeComponent', () => {
     expect(zone.valid).toBeTruthy();
 
   });
-  it('champ du prénom invalide avec aucune valeur ', () => {
+  it('champ du prénom invalide avec aucune valeur', () => {
     let errors = {};
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue(null);
     errors = zone.errors || {};
     expect(errors['required']).toBeTruthy();
+
+  });
+  it('champ du prénom invalide avec 1 caractère', () => {
+    let errors = {};
+    let zone = component.problemeForm.controls['prenom'];
+    zone.setValue('a');
+    errors = zone.errors || {};
+    expect(errors['minlength']).toBeTruthy();
 
   });
 });
