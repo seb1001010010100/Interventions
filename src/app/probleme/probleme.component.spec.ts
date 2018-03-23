@@ -25,22 +25,30 @@ describe('ProblemeComponent', () => {
   //   expect(component).toBeTruthy();
   // });
 
-  it('champ du prénom ne doit pas comporter moins de 3 charactère', () => {
+  it('champ du prénom invalide avec 2 caractères', () => {
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue('a'.repeat(2));
     expect(zone.valid).toBeFalsy();
 
   });
-  it('champ du prénom doit comporter au moins 3 charactère', () => {
+  it('champ du prénom valide avec 3 caractères', () => {
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue('a'.repeat(3));
     expect(zone.valid).toBeTruthy();
 
   });
-  it('champ du prénom peut comporter 200 charactère', () => {
+  it('champ du prénom valide avec 200 caractères', () => {
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue('a'.repeat(200));
     expect(zone.valid).toBeTruthy();
+
+  });
+  it('champ du prénom invalide avec aucune valeur ', () => {
+    let errors = {};
+    let zone = component.problemeForm.controls['prenom'];
+    zone.setValue(null);
+    errors = zone.errors || {};
+    expect(errors['required']).toBeTruthy();
 
   });
 });
