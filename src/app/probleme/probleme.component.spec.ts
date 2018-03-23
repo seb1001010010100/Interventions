@@ -37,5 +37,10 @@ describe('ProblemeComponent', () => {
     expect(zone.valid).toBeTruthy();
 
   });
+  it('champ du prénom peut comporter 200 charactère', () => {
+    let zone = component.problemeForm.controls['prenom'];
+    zone.setValue('a'.repeat(200));
+    expect(zone.valid).toBeTruthy();
 
+  });
 });
