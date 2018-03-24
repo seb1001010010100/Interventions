@@ -21,5 +21,13 @@ describe('sansEspaces Validator', () => {
 
     });
 
+    it('une phrase avec des mots est valide', () =>{
+
+        let control = {value: "CeciEstUnTest"};
+        let validator = VerifierEspaceValidator.sansEspace();
+        let result = validator(control as AbstractControl);
+        expect(result['prenom']).toBe(true);
+
+    });
 
 });
