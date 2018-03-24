@@ -30,4 +30,13 @@ describe('sansEspaces Validator', () => {
 
     });
 
+    it('une phrase avec 3 espaces, des mots et ensuite 3 espaces est valide', () =>{
+
+        let control = {value: " ".repeat(3) + "CeciEstUnTest" + " ".repeat(3) };
+        let validator = VerifierEspaceValidator.sansEspace();
+        let result = validator(control as AbstractControl);
+        expect(result['prenom']).toBe(true);
+
+    });
+
 });
