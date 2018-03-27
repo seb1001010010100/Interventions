@@ -8,11 +8,11 @@ export class VerifierEspaceValidator{
 
             if(!c.value.replace(/\s/g, '').length){
 
-                return { 'prenom': false };
+                return { 'sansespace': false };
 
             }
 
-            return {'prenom': true};
+            return {'sansespace': true};
 
         };
 
