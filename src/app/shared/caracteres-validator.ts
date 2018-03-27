@@ -18,9 +18,19 @@ export class VerifierEspaceValidator{
 
     }
 
-    static longueurMinimum(min: number, max: number): ValidatorFn{
+    static longueurMinimum(min: number): ValidatorFn{
 
-        
+        return(c: AbstractControl): {[key: string]: boolean} | null => {
+
+            if(c.value.replace(/\s/g, '').length >= min){
+
+                return { 'longeurMinimum': true };
+
+            }
+
+            return {'longeurMinimum': false};
+
+        };
 
     }
 

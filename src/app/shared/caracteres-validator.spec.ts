@@ -40,3 +40,43 @@ describe('sansEspaces Validator', () => {
     });
 
 });
+
+describe('longueurMinimum Validator', () => {
+
+    it('une expression avec 1 espace et 2 caractère est invalide', () =>{
+
+        let control = {value: " ".repeat(1) + "a".repeat(2) };
+        let validator = VerifierEspaceValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['longeurMinimum']).toBe(false);
+
+    });
+
+    it('une expression avec 2 espaces et 1 caractère est invalide', () =>{
+
+        let control = {value: " ".repeat(2) + "a".repeat(1) };
+        let validator = VerifierEspaceValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['longeurMinimum']).toBe(false);
+
+    });
+
+    it('une phrase avec 3 espaces et 3 caractères est valide', () =>{
+
+        let control = {value: " ".repeat(3) + "a".repeat(3) };
+        let validator = VerifierEspaceValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['longeurMinimum']).toBe(true);
+
+    });
+
+    it('une phrase avec 5 espaces, 5 caractères et 5 espaces est valide', () =>{
+
+        let control = {value: " ".repeat(5) + "a".repeat(5) };
+        let validator = VerifierEspaceValidator.longueurMinimum(3);
+        let result = validator(control as AbstractControl);
+        expect(result['longeurMinimum']).toBe(true);
+
+    });
+
+});
