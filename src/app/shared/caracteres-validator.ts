@@ -18,4 +18,10 @@ export class VerifierEspaceValidator{
 
     }
 
+    static longueurMinimum(min: number, max: number): ValidatorFn{
+
+        
+
+    }
+
 }
