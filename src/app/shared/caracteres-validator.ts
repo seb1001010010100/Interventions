@@ -34,4 +34,19 @@ export class VerifierEspaceValidator{
 
     }
 
+    static longueurMaximum(max: number): ValidatorFn{
+
+        return(c: AbstractControl): {[key: string]: boolean} | null => {
+
+            if(c.value.replace(/\s/g, '').length < max && c.value.replace(/\s/g, '').length > 0){
+
+                return { 'longueurMaximum': true };
+
+            }
+
+            return {'longueurMaximum': false};
+
+        };
+
+    }
 }

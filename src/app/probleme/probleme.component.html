@@ -27,6 +27,24 @@
                   </span>
                 </span>
             </div>
+            <label for="nom" class="col-md-2 col-form-label text-right">Nom : </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="nom" placeholder="Votre nom ici (obligatoire)" formControlName="nom" 
+                  [ngClass]="{'is-invalid': (problemeForm.get('nom').touched || problemeForm.get('nom').dirty) && !problemeForm.get('nom').errors.longueurMaximum,
+                  'is-valid': (problemeForm.get('nom').touched || problemeForm.get('nom').dirty) && problemeForm.get('nom').errors.longueurMaximum}">
+                <span class="form-text" *ngIf="(problemeForm.get('nom').touched || problemeForm.get('nom').dirty) && problemeForm.get('nom').errors">
+                    <span *ngIf="!problemeForm.get('nom').errors.sansespace">
+                        <small class="text-muted">
+                            Merci de saisir votre nom de famille.
+                        </small>
+                    </span> 
+                    <span *ngIf="!problemeForm.get('nom').errors.longueurMaximum && !problemeForm.get('nom').errors.required">
+                      <small class="text-muted">
+                          Veuillez entrer moins de caractères 
+                      </small>
+                    </span>
+                  </span>
+              </div>
           </div>
       </form>
   </div>

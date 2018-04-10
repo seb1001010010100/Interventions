@@ -16,8 +16,8 @@ export class ProblemeComponent implements OnInit {
 
     this.problemeForm = this.fb.group({
 
-      prenom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMinimum(3)]]
-
+      prenom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMinimum(3)]],
+      nom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMaximum(50)]]
 
     });
 
