@@ -52,13 +52,13 @@
             <label for="noTypeId" class="col-md-2 col-form-label text-right">Type de problème : </label>
             <div class="col-sm-10">
               <select class="form-control" id="noTypeId" formControlName="noTypeProbleme"
-                [ngClass]="{'is-invalid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) && !problemeForm.get('noTypeProbleme').value,
-                'is-valid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) && problemeForm.get('noTypeProbleme').value}">
+                [ngClass]="{'is-invalid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) && !problemeForm.get('noTypeProbleme').valid,
+                'is-valid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) && problemeForm.get('noTypeProbleme').valid}">
                 <option value="">Sélectionner un type de problème</option>
                 <option *ngFor="let cat of typeProblemes" [value]="cat.id">{{cat.descriptionProbleme}}</option>
               </select>
-              <span class="form-text" *ngIf="(problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) && !problemeForm.get('noTypeProbleme').value">
-                  <span *ngIf="!problemeForm.get('noTypeProbleme').value">
+              <span class="form-text" *ngIf="(problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) && problemeForm.get('noTypeProbleme').errors">
+                  <span *ngIf="!problemeForm.get('noTypeProbleme').valid">
                       <small class="text-muted">
                           Merci de sélectionner un type de problème
                       </small>

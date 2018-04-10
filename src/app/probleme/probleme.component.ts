@@ -22,7 +22,7 @@ export class ProblemeComponent implements OnInit {
 
       prenom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMinimum(3)]],
       nom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMaximum(50)]],
-      noTypeProbleme: ['']
+      noTypeProbleme: ['', [Validators.required]]
     });
 
     this.problemes.obtenirProblemes().subscribe(cat => this.typeProblemes = cat, error => this.errorMessage = <any>error);
