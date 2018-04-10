@@ -22,10 +22,51 @@ export class ProblemeComponent implements OnInit {
 
       prenom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMinimum(3)]],
       nom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMaximum(50)]],
-      noTypeProbleme: ['', [Validators.required]]
+      noTypeProbleme: ['', [Validators.required]],
+      telephone: [''],
+      courrielsGroup: this.fb.group({
+
+        courriel: [{value:''}],
+        courrielConfirmation: [{value:''}]
+      })
     });
 
     this.problemes.obtenirProblemes().subscribe(cat => this.typeProblemes = cat, error => this.errorMessage = <any>error);
+
+  }//ngOnInit
+
+  gestionCourriels(typeNotification: String): void{
+
+    const telephoneControl = this.problemeForm.get('telephone');
+    const courrielControl = this.problemeForm.get('courrielsGroup.courriel');
+    const courrielConfirmationControl = this.problemeForm.get('courrielsGroup.courrielConfirmation');
+
+    telephoneControl.clearValidators();
+    telephoneControl.reset();
+    telephoneControl.disable();
+
+    courrielControl.clearValidators();
+    courrielControl.reset();
+    courrielControl.disable();
+
+    courrielConfirmationControl.clearValidators();
+    courrielConfirmationControl.reset();
+    courrielConfirmationControl.disable();
+
+    if(typeNotification === 'ParCourriel'){
+
+      courrielControl.enable();
+      courrielControl.setValidators([Validators.required]);
+      courrielConfirmationControl.enable();
+      courrielConfirmationControl.setValidators([Validators.required]);
+
+    }else if(typeNotification === 'ParCourriel'){
+
+      telephoneControl.enable();
+      telephoneControl.setValidators([Validators.required]);
+
+    }
+    courrielControl.updateValueAndValidity();
 
   }
 

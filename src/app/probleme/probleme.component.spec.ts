@@ -84,4 +84,52 @@ describe('ProblemeComponent', () => {
     expect(errors['longueurMinimum']).toBeFalsy();
 
   });
+
+  describe('appliquerNotifications', () => {
+    
+    it('Zone TELEPHONE est désactivée quand ne pas me notifier', () => {
+      component.gestionCourriels('NePasNotifier');
+      let zone = component.problemeForm.controls['telephone'];
+      expect(zone.status).toEqual('DISABLED');
+  
+    });
+  
+    it('Zone TELEPHONE est vide quand ne pas me notifier', () => {
+      component.gestionCourriels('NePasNotifier');
+      let zone = component.problemeForm.controls['telephone'];
+      expect(zone.value).toEqual(null);
+  
+    });
+    it('Zone ADRESSE COURRIEL est désactivée quand ne pas me notifier', () => {
+      component.gestionCourriels('NePasNotifier');
+      let zone = component.problemeForm.get('courrielsGroup.courriel');
+      expect(zone.status).toEqual('DISABLED');
+  
+    });
+  
+    it('Zone ADRESSE COURRIEL est vide quand ne pas me notifier', () => {
+      component.gestionCourriels('NePasNotifier');
+      let zone = component.problemeForm.get('courrielsGroup.courriel');
+      expect(zone.value).toEqual(null);
+  
+    });
+    it('Zone CONFIRMER COURRIEL est désactivée quand ne pas me notifier', () => {
+      component.gestionCourriels('NePasNotifier');
+      let zone = component.problemeForm.get('courrielsGroup.courrielConfirmation');
+      expect(zone.status).toEqual('DISABLED');
+  
+    });
+  
+    it('Zone CONFIRMER COURRIEL est vide quand ne pas me notifier', () => {
+      component.gestionCourriels('NePasNotifier');
+      let zone = component.problemeForm.get('courrielsGroup.courrielConfirmation');
+      expect(zone.value).toEqual(null);
+  
+    });
+  
+  
+  });
+
+
 });
+
