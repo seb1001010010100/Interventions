@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { VerifierEspaceValidator } from '../shared/caracteres-validator';
+import { TypeproblemeService } from './typeprobleme.service';
+import { ITypeProbleme } from './typeprobleme';
 
 @Component({
   selector: 'inter-probleme',
@@ -10,7 +12,9 @@ import { VerifierEspaceValidator } from '../shared/caracteres-validator';
 export class ProblemeComponent implements OnInit {
 
   problemeForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  typeProblemes: ITypeProbleme[];
+  errorMessage: String;
+  constructor(private fb: FormBuilder, private problemes: TypeproblemeService) { }
 
   ngOnInit() {
 
@@ -20,6 +24,8 @@ export class ProblemeComponent implements OnInit {
       nom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMaximum(50)]]
 
     });
+
+    this.problemes.obtenirProblemes().subscribe(cat => this.typeProblemes = cat, error => this.errorMessage = <any>error);
 
   }
 
