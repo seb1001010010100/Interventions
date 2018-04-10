@@ -62,19 +62,23 @@ describe('ProblemeComponent', () => {
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue('a');
     errors = zone.errors || {};
-    expect(errors['minlength']).toBeTruthy();
+    expect(errors['longeurMinimum']).toBeTruthy();
 
   });
-  it('champ du prénom valide avec 50 espaces', () => {
+  it('champ du prénom invalide avec 50 espaces', () => {
+    let errors = {};
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue(' '.repeat(50));
-    expect(zone.valid).toBeTruthy();
+    errors = zone.errors || {};
+    expect(errors['sansEspace']).toBeFalsy();
 
   });
-  it('champ du prénom valide avec 2 espaces et 1 caractère', () => {
+  it('champ du prénom invalide avec 2 espaces et 1 caractère', () => {
+    let errors = {};
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue(' '.repeat(2) + 'a');
-    expect(zone.valid).toBeTruthy();
+    errors = zone.errors || {};
+    expect(errors['longueurMinimum']).toBeFalsy();
 
   });
 });

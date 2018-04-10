@@ -12,19 +12,19 @@
             <label for="prenom" class="col-md-2 col-form-label text-right">Prénom : </label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="prenom" placeholder="Votre prénom ici (obligatoire)" formControlName="prenom" 
-                [ngClass]="{'is-invalid': (problemeForm.get('prenom').touched || problemeForm.get('prenom').dirty) && !problemeForm.get('prenom').valid,
-                'is-valid': (problemeForm.get('prenom').touched || problemeForm.get('prenom').dirty) && problemeForm.get('prenom').valid}">
+                [ngClass]="{'is-invalid': (problemeForm.get('prenom').touched || problemeForm.get('prenom').dirty) && !problemeForm.get('prenom').errors.longeurMinimum,
+                'is-valid': (problemeForm.get('prenom').touched || problemeForm.get('prenom').dirty) && problemeForm.get('prenom').errors.longeurMinimum}">
               <span class="form-text" *ngIf="(problemeForm.get('prenom').touched || problemeForm.get('prenom').dirty) && problemeForm.get('prenom').errors">
-                  <span *ngIf="problemeForm.get('prenom').errors.minlength">
+                  <span *ngIf="!problemeForm.get('prenom').errors.sansespace">
+                      <small class="text-muted">
+                        Merci de saisir votre prénom.
+                      </small>
+                  </span> 
+                  <span *ngIf="!problemeForm.get('prenom').errors.longeurMinimum && !problemeForm.get('prenom').errors.required">
                     <small class="text-muted">
                       Veuillez entrer plus de charactères.
                     </small>
                   </span>
-                  <span *ngIf="problemeForm.get('prenom').errors.required">
-                      <small class="text-muted">
-                        Merci de saisir votre prénom.
-                      </small>
-                  </span>                  
                 </span>
             </div>
           </div>
