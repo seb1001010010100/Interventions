@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { VerifierEspaceValidator } from '../shared/caracteres-validator';
 import { TypeproblemeService } from './typeprobleme.service';
 import { ITypeProbleme } from './typeprobleme';
+import { DISABLED } from '@angular/forms/src/model';
 
 @Component({
   selector: 'inter-probleme',
@@ -23,7 +24,7 @@ export class ProblemeComponent implements OnInit {
       prenom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMinimum(3)]],
       nom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMaximum(50)]],
       noTypeProbleme: ['', [Validators.required]],
-      telephone: [''],
+      telephone: ['',[Validators.required]],
       courrielsGroup: this.fb.group({
 
         courriel: [{value:''}],
@@ -56,17 +57,19 @@ export class ProblemeComponent implements OnInit {
     if(typeNotification === 'ParCourriel'){
 
       courrielControl.enable();
-      courrielControl.setValidators([Validators.required]);
+      courrielControl.setValidators([Validators.required, Validators.email]);
       courrielConfirmationControl.enable();
-      courrielConfirmationControl.setValidators([Validators.required]);
+      courrielConfirmationControl.setValidators([Validators.required, Validators.email]);
 
-    }else if(typeNotification === 'ParCourriel'){
+    }else if(typeNotification === 'ParTelephone'){
 
       telephoneControl.enable();
       telephoneControl.setValidators([Validators.required]);
 
     }
+    telephoneControl.updateValueAndValidity();
     courrielControl.updateValueAndValidity();
+    courrielConfirmationControl.updateValueAndValidity();
 
   }
 
