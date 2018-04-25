@@ -4,6 +4,7 @@ import { VerifierEspaceValidator } from '../shared/caracteres-validator';
 import { TypeproblemeService } from './typeprobleme.service';
 import { ITypeProbleme } from './typeprobleme';
 import { DISABLED } from '@angular/forms/src/model';
+import { emailMatcherValidator } from '../shared/emailMatcher-validator';
 
 @Component({
   selector: 'inter-probleme',
@@ -27,9 +28,9 @@ export class ProblemeComponent implements OnInit {
       telephone: ['',[Validators.required]],
       courrielsGroup: this.fb.group({
 
-        courriel: [{value:''}],
-        courrielConfirmation: [{value:''}]
-      })
+        courriel: [{value:'',disabled:true}],
+        courrielConfirmation: [{value:'',disabled:true}]
+      },)
     });
 
     this.problemes.obtenirProblemes().subscribe(cat => this.typeProblemes = cat, error => this.errorMessage = <any>error);
@@ -41,6 +42,7 @@ export class ProblemeComponent implements OnInit {
     const telephoneControl = this.problemeForm.get('telephone');
     const courrielControl = this.problemeForm.get('courrielsGroup.courriel');
     const courrielConfirmationControl = this.problemeForm.get('courrielsGroup.courrielConfirmation');
+    const courrielGroupControl = this.problemeForm.get('courrielsGroup');
 
     telephoneControl.clearValidators();
     telephoneControl.reset();
@@ -54,22 +56,28 @@ export class ProblemeComponent implements OnInit {
     courrielConfirmationControl.reset();
     courrielConfirmationControl.disable();
 
+
+
     if(typeNotification === 'ParCourriel'){
 
+      courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielDifferents])]);
       courrielControl.enable();
       courrielControl.setValidators([Validators.required, Validators.email]);
       courrielConfirmationControl.enable();
       courrielConfirmationControl.setValidators([Validators.required, Validators.email]);
+      
+     
 
     }else if(typeNotification === 'ParTelephone'){
 
       telephoneControl.enable();
-      telephoneControl.setValidators([Validators.required]);
+      telephoneControl.setValidators([Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(10), Validators.maxLength(10)]);
 
     }
     telephoneControl.updateValueAndValidity();
     courrielControl.updateValueAndValidity();
     courrielConfirmationControl.updateValueAndValidity();
+    courrielGroupControl.updateValueAndValidity();
 
   }
 
