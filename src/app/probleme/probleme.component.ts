@@ -25,7 +25,8 @@ export class ProblemeComponent implements OnInit {
       prenom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMinimum(3)]],
       nom: ['',[Validators.required,VerifierEspaceValidator.sansEspace(),VerifierEspaceValidator.longueurMaximum(50)]],
       noTypeProbleme: ['', [Validators.required]],
-      telephone: ['',[Validators.required]],
+      telephone: [{value: '', disabled:true}],
+      notification: ['NePasNotifier'],
       courrielsGroup: this.fb.group({
 
         courriel: [{value:'',disabled:true}],
@@ -35,6 +36,7 @@ export class ProblemeComponent implements OnInit {
 
     this.problemes.obtenirProblemes().subscribe(cat => this.typeProblemes = cat, error => this.errorMessage = <any>error);
 
+    this.problemeForm.get('notification').valueChanges.subscribe(value=> this.gestionCourriels(value));
   }//ngOnInit
 
   gestionCourriels(typeNotification: String): void{
