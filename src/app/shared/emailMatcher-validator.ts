@@ -2,17 +2,18 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export class emailMatcherValidator {
 
-    static courrielDifferents(): ValidatorFn {
+    static courrielConfirmation(): ValidatorFn {
 
         return (c: AbstractControl): { [key: string]: boolean } | null => {
-
-            if (!c.get('courriel').value || !c.get('courrielConfirmation').value) {
+            let courriel = c.get('courriel');
+            let courrielConfirmation = c.get('courrielConfirmation');
+            if (!courriel.value || !courrielConfirmation.value) {
 
                 return null;
 
             }
 
-            return c.get('courriel').value === c.get('courrielConfirmation').value ? null : { match: true };
+            return courriel.value === courrielConfirmation.value ? null : { 'courrielConfirmation': true };
             
         };
     }

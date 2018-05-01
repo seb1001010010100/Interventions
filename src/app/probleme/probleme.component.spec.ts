@@ -179,35 +179,44 @@ describe('ProblemeComponent', () => {
       zoneConfirmation.setValue("a@valeurvalide.ca");
       let groupe = component.problemeForm.get('courrielsGroup');
       errors = groupe.errors || {};
-      expect(errors['match']).toBeUndefined();
+      expect(errors['courrielConfirmation']).toBeUndefined();
     });
 
     it('Zone ADRESSE COURRIEL avec valeur valide et Zone CONFIRMER COURRIEL sans valeur retourne null', () => {
-
-  
+      let errors = {};
+      component.gestionCourriels('ParCourriel');
+      let zone = component.problemeForm.get('courrielsGroup.courriel');
+      let zoneConfirmation = component.problemeForm.get('courrielsGroup.courrielConfirmation');
+      zone.setValue("a@valeurvalide.ca");
+      zoneConfirmation.setValue("");
+      let groupe = component.problemeForm.get('courrielsGroup');
+      errors = groupe.errors || {};
+      expect(errors['courrielConfirmation']).toBeUndefined();
     });
 
     it('Zones ADRESSE COURRIEL et CONFIRMER COURRIEL sont invalides si les valeurs sont différentes quand notifier par courriel', () => {
-
+      let errors = {};
       component.gestionCourriels('ParCourriel');
       let zone = component.problemeForm.get('courrielsGroup.courriel');
       let zoneConfirmation = component.problemeForm.get('courrielsGroup.courrielConfirmation');
       zone.setValue("a@angular.com");
       zoneConfirmation.setValue("b@angular.com");
-      expect(zone.status).toEqual('INVALID');
-      expect(zoneConfirmation.status).toEqual('INVALID');
+      let groupe = component.problemeForm.get('courrielsGroup');
+      errors = groupe.errors || {};
+      expect(errors['courrielConfirmation']).toBeTruthy;
   
     });
 
     it('Zones ADRESSE COURRIEL et CONFIRMER COURRIEL sont valides si les valeurs sont identiques quand notifier par courriel', () => {
+      let errors = {};
       component.gestionCourriels('ParCourriel');
       let zone = component.problemeForm.get('courrielsGroup.courriel');
       let zoneConfirmation = component.problemeForm.get('courrielsGroup.courrielConfirmation');
       zone.setValue("a@angular.com");
       zoneConfirmation.setValue("a@angular.com");
-      expect(zone.status).toEqual('VALID');
-      expect(zoneConfirmation.status).toEqual('VALID');
-  
+      let groupe = component.problemeForm.get('courrielsGroup');
+      errors = groupe.errors || {};
+      expect(errors['courrielConfirmation']).toBeUndefined();
     });
 
     it('Zone TELEPHONE est activée quand notifier par messagerie texte', () => {

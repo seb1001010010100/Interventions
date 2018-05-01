@@ -60,7 +60,7 @@ export class ProblemeComponent implements OnInit {
 
     if(typeNotification === 'ParCourriel'){
 
-      courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielDifferents])]);
+      courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])]);
       courrielControl.enable();
       courrielControl.setValidators([Validators.required, Validators.email]);
       courrielConfirmationControl.enable();
