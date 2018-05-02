@@ -12,7 +12,7 @@ export class VerifierEspaceValidator{
 
             }
 
-            return {'sansespace': true};
+            return null;
 
         };
 
@@ -24,7 +24,7 @@ export class VerifierEspaceValidator{
 
             if(c.value.replace(/\s/g, '').length >= min){
 
-                return { 'longeurMinimum': true };
+                return null;
 
             }
 
@@ -40,7 +40,7 @@ export class VerifierEspaceValidator{
 
             if(c.value.replace(/\s/g, '').length < max && c.value.replace(/\s/g, '').length > 0){
 
-                return { 'longueurMaximum': true };
+                return null;
 
             }
 

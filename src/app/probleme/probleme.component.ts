@@ -31,7 +31,11 @@ export class ProblemeComponent implements OnInit {
 
         courriel: [{value:'',disabled:true}],
         courrielConfirmation: [{value:'',disabled:true}]
-      },)
+      },),
+      descriptionProbleme: ['', [Validators.required, Validators.minLength(5)]],
+      noUnite: '',
+      dateProbleme: {value: Date(), disabled: true} 
+
     });
 
     this.problemes.obtenirProblemes().subscribe(cat => this.typeProblemes = cat, error => this.errorMessage = <any>error);

@@ -4,6 +4,7 @@ import { ProblemeComponent } from './probleme.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TypeproblemeService } from './typeprobleme.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -11,7 +12,7 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule,HttpClientModule],
+      imports: [ReactiveFormsModule,HttpClientModule,AngularFontAwesomeModule],
       declarations: [ ProblemeComponent ],
       providers:[TypeproblemeService]
     })
@@ -41,7 +42,7 @@ describe('ProblemeComponent', () => {
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue('a'.repeat(3));
     errors = zone.errors || {};
-    expect(errors['longeurMinimum']).toBeTruthy();
+    expect(errors['longeurMinimum']).toBeUndefined();
 
   });
   it('champ du prénom valide avec 200 caractères', () => {
@@ -49,7 +50,7 @@ describe('ProblemeComponent', () => {
     let zone = component.problemeForm.controls['prenom'];
     zone.setValue('a'.repeat(200));
     errors = zone.errors || {};
-    expect(errors['longeurMinimum']).toBeTruthy();
+    expect(errors['longeurMinimum']).toBeUndefined();
 
   });
   it('champ du prénom invalide avec aucune valeur', () => {

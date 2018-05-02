@@ -20,6 +20,7 @@ import { TypeproblemeService } from './probleme/typeprobleme.service';
     AppComponent,
     AccueilComponent,
     ProblemeComponent
+    
   ],
   imports: [
     BrowserModule,

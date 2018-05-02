@@ -26,7 +26,7 @@ describe('sansEspaces Validator', () => {
         let control = {value: "CeciEstUnTest"};
         let validator = VerifierEspaceValidator.sansEspace();
         let result = validator(control as AbstractControl);
-        expect(result['sansespace']).toBe(true);
+        expect(result).toBeNull();
 
     });
 
@@ -35,7 +35,7 @@ describe('sansEspaces Validator', () => {
         let control = {value: " ".repeat(3) + "CeciEstUnTest" + " ".repeat(3) };
         let validator = VerifierEspaceValidator.sansEspace();
         let result = validator(control as AbstractControl);
-        expect(result['sansespace']).toBe(true);
+        expect(result).toBeNull();
 
     });
 
@@ -66,7 +66,7 @@ describe('longueurMinimum Validator', () => {
         let control = {value: " ".repeat(3) + "a".repeat(3) };
         let validator = VerifierEspaceValidator.longueurMinimum(3);
         let result = validator(control as AbstractControl);
-        expect(result['longeurMinimum']).toBe(true);
+        expect(result).toBeNull();
 
     });
 
@@ -75,7 +75,7 @@ describe('longueurMinimum Validator', () => {
         let control = {value: " ".repeat(5) + "a".repeat(5) };
         let validator = VerifierEspaceValidator.longueurMinimum(3);
         let result = validator(control as AbstractControl);
-        expect(result['longeurMinimum']).toBe(true);
+        expect(result).toBeNull();
 
     });
 
